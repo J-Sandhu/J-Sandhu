@@ -1,0 +1,25 @@
+import random
+frame=[]  #create the array that will hold data
+for i in range(5):   #feed random data into the frame to test
+  frame.append([random.randint(1,10),random.randint(1,10)])
+def output(frame):
+  for col in range(len(frame[0])):     #cycle through the columns
+    for row in range(len(frame)):      #cycle through to rows
+      print(frame[row][col],end=" ")   #output the value
+    print("")                          #new line
+def SmallestInRow(frame,row):
+  smallest=frame[0][row]         #assign first datum as smallest
+  for col in range(len(frame)):  #start looking through the defined row
+    if frame[col][row]<smallest: 
+      smallest=frame[col][row]   #replace smallest with new smallest
+  return smallest
+def SmallestInColumn(frame,col):
+  smallest=frame[col][0]         #assign first datum as smallest
+  for row in range(len(frame[0])):  #look through column
+    if frame[col][row]<smallest:
+      smallest=frame[col][row]    #replace smallest with new smallest
+def step1(frame):                 #make sure everything is in order
+  length=len(frame)
+  width=len(frame[0])
+  print(length)
+  print(width)
