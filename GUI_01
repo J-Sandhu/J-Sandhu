@@ -1,0 +1,78 @@
+import PySimpleGUI as sg
+def CreateInputTable(size=3):
+  frame=[]                    #create frame for data & text
+  tasklist=[]                 #create one list for text at top
+  for columns in range(1,size+1):
+    tasklist.append((sg.Text("Task%s"%columns,pad=(0,0))))
+  frame.append(tasklist)
+  for rowNo in range(size):
+    workingrow=[]
+    for columnNo in range(1,size+1):
+      row=chr(ord("A")+rowNo)
+      workingrow.append(sg.In(key=row+str(columnNo), size=(3,1)))
+    workingrow.append(sg.Text("Worker "+str(rowNo+1)))
+    frame.append(workingrow)
+  frame.append([sg.B("Submit")])
+  return frame
+layout = [[sg.Text('Enter username and password.')],
+          [
+              sg.InputText(key="input1", size=(10, 1)),
+              sg.InputText(key="input2", size=(10, 1))
+          ], [sg.B("Sign In")]]
+
+window = sg.Window('Log in', layout)
+
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+    text_input = values["input1"]
+    text_input2 = values["input2"]
+    if (text_input, text_input2) == ("Jai", "Open"):
+        sg.popup("Logged In")
+        window.close()
+    else:
+        sg.popup("Rejected")
+layout2=[[sg.Text("Enter the number of tasks/workers")],
+         [sg.InputText(key="Table size", size=(2,1)) ],
+         [sg.B("Submit")]]
+
+window=sg.Window("Size",layout2)
+
+while True:
+  event, values= window.read()
+  if event == sg.WIN_CLOSED:
+    break
+  TableSize = values["Table size"]
+  if TableSize.isdigit()==True:
+    window.close()
+    window3= sg.Window("Main",CreateInputTable(int(TableSize)))
+  else:
+    sg.popup("Please enter an integer value")
+
+# layout3 = [[
+#     sg.In(key="A1", size=(3, 1)),
+#     sg.In(key="A2", size=(3, 1)),
+#     sg.In(key="A3", size=(3, 1))
+# ],
+#            [
+#                sg.In(key="B1", size=(3, 1)),
+#                sg.In(key="B2", size=(3, 1)),
+#                sg.In(key="B3", size=(3, 1))
+#            ],
+#            [
+#                sg.In(key="C1", size=(3, 1)),
+#                sg.In(key="C2", size=(3, 1)),
+#                sg.In(key="C3", size=(3, 1))
+#            ], [sg.B("Submit")]]
+
+# window3 = sg.Window("Main", layout3)
+
+while True:
+    event, values = window3.read()
+    A = values["A1"]
+    if event == "Submit":
+      if A == "1":
+        sg.popup("Awesome")
+        print(values)
+        break
