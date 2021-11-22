@@ -1,0 +1,7 @@
+import numpy as np
+size = int(input("Enter size"))
+frame = np.full((size,size),999)
+print(frame)
+frame2 = np.arange(9).reshape(3,3)
+print(frame2.min(axis=0))
+print(frame-frame2)
